@@ -221,6 +221,20 @@ func OpenOffline(file string) (handle *Handle, err error) {
 	return &Handle{cptr: cptr}, nil
 }
 
+// OpenDead creates a Pcap handle without having it attached to a device
+// or to a file. It is typically used when just using the pcap package
+// for compiling BPF code.
+func OpenDead(linktype layers.LinkType, snaplen int32) (handle *Handle, _ error) {
+	buf := (*C.char)(C.calloc(errorBufferSize, 1))
+	defer C.free(unsafe.Pointer(buf))
+
+	cptr := C.pcap_open_dead(C.int(linktype), C.int(snaplen))
+	if cptr == nil {
+		return nil, errors.New(C.GoString(buf))
+	}
+	return &Handle{cptr: cptr}, nil
+}
+
 // NextError is the return code from a call to Next.
 type NextError int32
 
@@ -455,6 +469,11 @@ func destroyBPF(bpf *BPF) {
 // String returns the original string this BPF filter was compiled from.
 func (b *BPF) String() string {
 	return b.orig
+}
+
+// BPF returns the compiled BPF program.
+func (b *BPF) BPF() _Ctype_struct_bpf_program {
+	return b.bpf
 }
 
 // Matches returns true if the given packet data matches this filter.
