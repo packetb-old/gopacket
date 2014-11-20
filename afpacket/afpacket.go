@@ -14,11 +14,11 @@ package afpacket
 // http://codemonkeytips.blogspot.co.uk/2011/07/asynchronous-packet-socket-reading-with.html
 
 import (
+	"errors"
+	"fmt"
 	"github.com/packetbeat/gopacket"
 	"github.com/packetbeat/gopacket/layers"
 	"github.com/packetbeat/gopacket/pcap"
-	"errors"
-	"fmt"
 	"net"
 	"runtime"
 	"sync"
@@ -309,7 +309,8 @@ func (h *TPacket) pollForFirstPacket(hdr header) error {
 		h.pollset.fd = h.fd
 		h.pollset.events = C.POLLIN
 		h.pollset.revents = 0
-		_, err := C.poll(&h.pollset, 1, -1)
+		timeout := C.int(h.opts.timeout / time.Millisecond)
+		_, err := C.poll(&h.pollset, 1, timeout)
 		h.stats.Polls++
 		if err != nil {
 			return err
