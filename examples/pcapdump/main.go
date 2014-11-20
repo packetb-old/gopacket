@@ -9,11 +9,11 @@
 package main
 
 import (
-	"code.google.com/p/gopacket/dumpcommand"
-	"code.google.com/p/gopacket/examples/util"
-	"code.google.com/p/gopacket/pcap"
 	"flag"
 	"fmt"
+	"github.com/packetbeat/gopacket/dumpcommand"
+	"github.com/packetbeat/gopacket/examples/util"
+	"github.com/packetbeat/gopacket/pcap"
 	"log"
 	"os"
 	"strings"

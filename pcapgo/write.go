@@ -9,10 +9,10 @@
 package pcapgo
 
 import (
-	"code.google.com/p/gopacket"
-	"code.google.com/p/gopacket/layers"
 	"encoding/binary"
 	"fmt"
+	"github.com/packetbeat/gopacket"
+	"github.com/packetbeat/gopacket/layers"
 	"io"
 )
 

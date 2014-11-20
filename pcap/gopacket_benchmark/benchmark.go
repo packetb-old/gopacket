@@ -18,14 +18,14 @@
 package main
 
 import (
-	"code.google.com/p/gopacket"
-	"code.google.com/p/gopacket/layers"
-	"code.google.com/p/gopacket/pcap"
-	"code.google.com/p/gopacket/tcpassembly"
 	"compress/gzip"
 	"encoding/hex"
 	"flag"
 	"fmt"
+	"github.com/packetbeat/gopacket"
+	"github.com/packetbeat/gopacket/layers"
+	"github.com/packetbeat/gopacket/pcap"
+	"github.com/packetbeat/gopacket/tcpassembly"
 	"io"
 	"io/ioutil"
 	"net/http"

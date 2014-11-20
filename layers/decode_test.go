@@ -9,10 +9,10 @@ package layers
 
 import (
 	"bytes"
-	"code.google.com/p/gopacket"
-	"code.google.com/p/gopacket/bytediff"
 	"encoding/hex"
 	"fmt"
+	"github.com/packetbeat/gopacket"
+	"github.com/packetbeat/gopacket/bytediff"
 	"net"
 	"reflect"
 	"strings"

@@ -8,8 +8,8 @@
 package layers
 
 import (
-	"code.google.com/p/gopacket"
 	"fmt"
+	"github.com/packetbeat/gopacket"
 )
 
 // Checksum computation for TCP/UDP.

@@ -11,9 +11,9 @@ package layers
 
 import (
 	"bytes"
-	"code.google.com/p/gopacket"
 	"encoding/binary"
 	"fmt"
+	"github.com/packetbeat/gopacket"
 	"hash/crc32"
 	"net"
 )

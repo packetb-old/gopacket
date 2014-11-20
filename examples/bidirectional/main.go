@@ -9,13 +9,13 @@
 package main
 
 import (
-	"code.google.com/p/gopacket"
-	"code.google.com/p/gopacket/examples/util"
-	"code.google.com/p/gopacket/layers"
-	"code.google.com/p/gopacket/pcap"
-	"code.google.com/p/gopacket/tcpassembly"
 	"flag"
 	"fmt"
+	"github.com/packetbeat/gopacket"
+	"github.com/packetbeat/gopacket/examples/util"
+	"github.com/packetbeat/gopacket/layers"
+	"github.com/packetbeat/gopacket/pcap"
+	"github.com/packetbeat/gopacket/tcpassembly"
 	"log"
 	"time"
 )

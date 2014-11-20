@@ -14,7 +14,7 @@ package afpacket
 // http://codemonkeytips.blogspot.co.uk/2011/07/asynchronous-packet-socket-reading-with.html
 
 import (
-	"code.google.com/p/gopacket"
+	"github.com/packetbeat/gopacket"
 	"errors"
 	"fmt"
 	"net"
