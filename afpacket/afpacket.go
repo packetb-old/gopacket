@@ -16,9 +16,9 @@ package afpacket
 import (
 	"code.google.com/p/gopacket"
 	"code.google.com/p/gopacket/layers"
+	"code.google.com/p/gopacket/pcap"
 	"errors"
 	"fmt"
-	"github.com/packetbeat/gopacket/pcap"
 	"net"
 	"runtime"
 	"sync"
@@ -357,17 +357,20 @@ func (h *TPacket) SetBPFFilter(expr string) (err error) {
 	// Open a dummy pcap handle
 	p, err := pcap.OpenDead(layers.LinkTypeEthernet, int32(h.opts.frameSize))
 	if err != nil {
-		return err
+		return fmt.Errorf("OpenDead: %s", err)
 	}
 
 	bpf, err := p.NewBPF(expr)
 	if err != nil {
-		return err
+		return fmt.Errorf("NewBPF: %s", err)
 	}
 
 	program := bpf.BPF()
 
-	_, err = C.setsockopt(h.fd, C.SOL_PACKET, C.SO_ATTACH_FILTER,
+	_, err = C.setsockopt(h.fd, C.SOL_SOCKET, C.SO_ATTACH_FILTER,
 		unsafe.Pointer(&program), C.socklen_t(unsafe.Sizeof(program)))
-	return err
+	if err != nil {
+		return fmt.Errorf("setsockopt: %s", err)
+	}
+	return nil
 }
