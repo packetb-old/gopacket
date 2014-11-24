@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// #include <linux/if_packet.h>
+// #include "if_packet.h"
 // #include <sys/socket.h>
 import "C"
 
