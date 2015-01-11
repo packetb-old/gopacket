@@ -799,8 +799,9 @@ func (d *Dumper) WritePacketData(data []byte, ci gopacket.CaptureInfo) (err erro
 	var pkthdr _Ctype_struct_pcap_pkthdr
 	pkthdr.caplen = C.bpf_u_int32(ci.CaptureLength)
 	pkthdr.len = C.bpf_u_int32(ci.Length)
-	pkthdr.ts.tv_sec = C.__time_t(ci.Timestamp.Unix())
-	pkthdr.ts.tv_usec = C.__suseconds_t((ci.Timestamp.UnixNano() % 1e9) / 1000)
+
+	pkthdr.ts.tv_sec = C.gopacket_time_secs_t(ci.Timestamp.Unix())
+	pkthdr.ts.tv_usec = C.gopacket_time_usecs_t(ci.Timestamp.Nanosecond() / 1000)
 
 	// pcap_dump takes a u_char pointer to the dumper as first argument
 	dumper_ptr := (*C.u_char)(unsafe.Pointer(d.cptr))

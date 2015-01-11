@@ -14,7 +14,7 @@ import (
 	"unsafe"
 )
 
-// #include <linux/if_packet.h>
+// #include "if_packet.h"
 import "C"
 
 // Our model of handling all TPacket versions is a little hacky, to say the
