@@ -225,12 +225,9 @@ func OpenOffline(file string) (handle *Handle, err error) {
 // or to a file. It is typically used when just using the pcap package
 // for compiling BPF code.
 func OpenDead(linktype layers.LinkType, snaplen int32) (handle *Handle, _ error) {
-	buf := (*C.char)(C.calloc(errorBufferSize, 1))
-	defer C.free(unsafe.Pointer(buf))
-
 	cptr := C.pcap_open_dead(C.int(linktype), C.int(snaplen))
 	if cptr == nil {
-		return nil, errors.New(C.GoString(buf))
+		return nil, errors.New("pcap_open_dead failed")
 	}
 	return &Handle{cptr: cptr}, nil
 }
