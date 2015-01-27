@@ -159,6 +159,11 @@ struct tpacket_bd_ts {
 	};
 };
 
+#ifndef __aligned_u64
+// This is not defined on debian squeeze.
+#define __aligned_u64 __u64 __attribute__((aligned(8)))
+#endif
+
 struct tpacket_hdr_v1 {
 	__u32	block_status;
 	__u32	num_pkts;
